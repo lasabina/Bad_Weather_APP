@@ -9,5 +9,4 @@ public class BadWeatherApp {
         System.out.println("Running");
 
     }
-
 }

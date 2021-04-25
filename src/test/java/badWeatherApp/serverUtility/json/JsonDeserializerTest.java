@@ -48,7 +48,7 @@ class JsonDeserializerTest {
     void shouldCreateTestClassObjectFromJsonString(){
         String JsonString = "{ \"id\" : 54, \"property\" : \"visible=true\", \"value\" : 65.34 }";
         try {
-            TestClass testClass = JsonDeserializer.deserialize(JsonString, TestClass.class);
+            TestClass testClass = JsonStringDeserializer.deserialize(JsonString, TestClass.class);
             System.out.println(testClass);
         } catch (IOException e) {
             e.printStackTrace();
