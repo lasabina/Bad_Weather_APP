@@ -13,7 +13,7 @@ public class WeatherstackResponse implements WeatherReadable {
 
     @Override
     public LocalTime getObservationTime() {
-        return LocalTime.parse(current.getObservationTime());
+        return LocalTime.parse(current.getObservationTime().substring(0,5));
     }
 
     @Override
