@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ResponseCollector {
 
@@ -27,40 +29,27 @@ public class ResponseCollector {
         List<Double> returnValues = new ArrayList<>();
         switch (measurement) {
             case TEMPERATURE:
-                for (WeatherReadable weatherReadable : forecastSet) {
-                    returnValues.add(weatherReadable.getTemperature());
-                }
-                return returnValues;
+                return getMeasurement(WeatherReadable::getTemperature);
             case FEELS_LIKE:
-                for (WeatherReadable weatherReadable : forecastSet) {
-                    returnValues.add(weatherReadable.getFeelsLikeTemperature());
-                }
-                return returnValues;
+                return getMeasurement(WeatherReadable::getFeelsLikeTemperature);
             case WIND_SPEED:
-                for (WeatherReadable weatherReadable : forecastSet) {
-                    returnValues.add(weatherReadable.getWindSpeed());
-                }
-                return returnValues;
+                return getMeasurement(WeatherReadable::getWindSpeed);
             case WIND_DIRECTION:
-                for (WeatherReadable weatherReadable : forecastSet) {
-                    returnValues.add(weatherReadable.getWindDegree());
-                }
-                return returnValues;
+                return getMeasurement(WeatherReadable::getWindDegree);
             case PRESSURE:
-                for (WeatherReadable weatherReadable : forecastSet) {
-                    returnValues.add(weatherReadable.getPressure());
-                }
-                return returnValues;
+                return getMeasurement(WeatherReadable::getPressure);
             case HUMIDITY:
-                for (WeatherReadable weatherReadable : forecastSet) {
-                    returnValues.add(weatherReadable.getHumidity());
-                }
-                return returnValues;
+                return getMeasurement(WeatherReadable::getHumidity);
             default:
                 return null;
         }
     }
 
+    private List<Double> getMeasurement(Function<WeatherReadable,Double> function) {
+        List<Double> returnValues = new ArrayList<>();
+        forecastSet.forEach(f -> returnValues.add(function.apply(f)));
+        return returnValues;
+    }
 
     private Set<WeatherReadable> getForecasts(String city) {
         if (forecastSet == null) {
