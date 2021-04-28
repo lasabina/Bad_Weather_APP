@@ -1,12 +1,15 @@
 package badWeatherApp.dataOperations.dataFormater;
 
+
 import badWeatherApp.dataOperations.dataCalculator.DataCalculator;
+
 import lombok.AllArgsConstructor;
 
 import java.util.List;
 
 @AllArgsConstructor
 public class DataFormater {
+
 
 
     public static String displayTheAverageTemperature(List<Double> valueList) {
@@ -48,7 +51,6 @@ public class DataFormater {
         DataCalculator displayWorldDirection = new DataCalculator(0);
         return displayWorldDirection.worldDirection(DataCalculator.doubleToInt(DataCalculator.averageDegreeDirection(valueList))) + ".";
     }
-
 
 }
 

@@ -2,15 +2,11 @@ package badWeatherApp.serverUtility.serverCommunication;
 
 import badWeatherApp.serverUtility.json.JsonStringDeserializer;
 import badWeatherApp.serverUtility.response.WeatherReadable;
-import badWeatherApp.serverUtility.response.openWeatherMap.OpenWeatherMapResponse;
-import badWeatherApp.serverUtility.response.weatherStack.WeatherstackResponse;
-import badWeatherApp.serverUtility.serverCommunication.openWeatherMap.OpenWeatherMapServer;
-import badWeatherApp.serverUtility.serverCommunication.weatherStack.WeatherstackServer;
+import badWeatherApp.serverUtility.response.OpenWeatherMapResponse;
+import badWeatherApp.serverUtility.response.WeatherstackResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ServerTest {

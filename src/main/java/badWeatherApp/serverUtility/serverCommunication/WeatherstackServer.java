@@ -1,7 +1,7 @@
-package badWeatherApp.serverUtility.serverCommunication.weatherStack;
+package badWeatherApp.serverUtility.serverCommunication;
 
 import badWeatherApp.serverUtility.response.WeatherReadable;
-import badWeatherApp.serverUtility.response.weatherStack.WeatherstackResponse;
+import badWeatherApp.serverUtility.response.WeatherstackResponse;
 import badWeatherApp.serverUtility.serverCommunication.RequestBuilder;
 import badWeatherApp.serverUtility.serverCommunication.Requestable;
 
