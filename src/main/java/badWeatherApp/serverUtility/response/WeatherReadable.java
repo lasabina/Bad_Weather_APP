@@ -4,8 +4,9 @@ import java.time.LocalTime;
 
 public interface WeatherReadable {
 
+    String getCity();
+    String getCountry();
     LocalTime getObservationTime();
-
     double getTemperature();
     double getFeelsLikeTemperature();
     double getHumidity();

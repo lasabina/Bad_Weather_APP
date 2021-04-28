@@ -11,6 +11,12 @@ import java.util.List;
 
 public class ForecastManager {
 
+    public static List<Forecast> getAllForecasts() {
+        try (Session session = HibernateHelper.INSTANCE.getSession()) {
+            return session.createQuery("FROM Forecast", Forecast.class).getResultList();
+        }
+    }
+
     public static List<Forecast> getForecastByCity(String city) {
         try (Session session = HibernateHelper.INSTANCE.getSession()) {
             List<Forecast> forecasts = session.createNamedQuery(Forecast.FIND_BY_CITY, Forecast.class)
@@ -39,9 +45,24 @@ public class ForecastManager {
         return forecast.getIdForecast();
     }
 
-    public static boolean removeForecast(Integer id) {
+    public static boolean removeForecastbyID(Integer id) {
         try (Session session = HibernateHelper.INSTANCE.getSession()) {
             Forecast forecast = session.find(Forecast.class, id);
+            if(forecast == null){
+                return false;
+            }
+            Transaction transaction = session.beginTransaction();
+            session.remove(forecast);
+            transaction.commit();
+            return true;
+        }
+    }
+
+    public static boolean removeForecastbyCity(String city) {
+        //trzeba przes Selecta - aktualnie szuka po kluczu, którym jest ID
+        //todo
+        try (Session session = HibernateHelper.INSTANCE.getSession()) {
+            Forecast forecast = session.find(Forecast.class, city);
             if(forecast == null){
                 return false;
             }
