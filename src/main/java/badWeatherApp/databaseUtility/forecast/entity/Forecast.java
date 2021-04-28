@@ -8,10 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @NamedQueries({
-        @NamedQuery(name = Forecast.FIND_BY_CITY, query = "SELECT e from Forecast e WHERE e.city = :city ")
-})
-
-@NamedQueries({
+        @NamedQuery(name = Forecast.FIND_BY_CITY, query = "SELECT e from Forecast e WHERE e.city = :city "),
         @NamedQuery(name = Forecast.FIND_BY_COUNTRY, query = "SELECT e from Forecast e WHERE e.country = :coutry ")
 })
 

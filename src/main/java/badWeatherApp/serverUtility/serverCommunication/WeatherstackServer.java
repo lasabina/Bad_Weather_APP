@@ -1,35 +1,35 @@
-package badWeatherApp.serverUtility.serverCommunication.openWeatherMap;
+package badWeatherApp.serverUtility.serverCommunication;
 
 import badWeatherApp.serverUtility.response.WeatherReadable;
-import badWeatherApp.serverUtility.response.openWeatherMap.OpenWeatherMapResponse;
+import badWeatherApp.serverUtility.response.WeatherstackResponse;
 import badWeatherApp.serverUtility.serverCommunication.RequestBuilder;
 import badWeatherApp.serverUtility.serverCommunication.Requestable;
 
 import java.io.IOException;
 
-public class OpenWeatherMapServer implements Requestable {
+public class WeatherstackServer implements Requestable {
     @Override
     public String getServerName() {
-        return "OpenWeatherMap";
+        return "WeatherStack";
     }
 
     @Override
     public String getBaseUrl() {
-        return "http://api.openweathermap.org/data/2.5/";
+        return "http://api.weatherstack.com/";
     }
 
     @Override
     public String getApiKey() {
-        return "5ea105b45cbca36fc189afcc0fd9ea5f";
+        return "7b58749d523ef5f51a52de07ab83d093";
     }
 
     @Override
     public String getCurrentForecastForCity(String city) throws IOException {
-        return RequestBuilder.getResponse(getBaseUrl() + "/weather?q=" + city + "&appid=" + getApiKey()+ "&units=metric");
+        return RequestBuilder.getResponse(getBaseUrl() + "current?access_key=" + getApiKey() + "&query=" + city);
     }
 
     @Override
     public Class<? extends WeatherReadable> getResponseClass() {
-        return OpenWeatherMapResponse.class;
+        return WeatherstackResponse.class;
     }
 }

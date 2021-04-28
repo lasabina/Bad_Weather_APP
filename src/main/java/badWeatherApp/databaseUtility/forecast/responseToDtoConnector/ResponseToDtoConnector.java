@@ -2,14 +2,10 @@ package badWeatherApp.databaseUtility.forecast.responseToDtoConnector;
 
 import badWeatherApp.dataOperations.dataCalculator.DataCalculator;
 import badWeatherApp.databaseUtility.forecast.entity.ForecastDTO;
-import badWeatherApp.databaseUtility.location.entity.LocationDTO;
 import badWeatherApp.serverUtility.responseCollector.Measurement;
 import badWeatherApp.serverUtility.responseCollector.ResponseCollector;
-import badWeatherApp.serverUtility.serverCommunication.openWeatherMap.OpenWeatherMapServer;
-import badWeatherApp.serverUtility.serverCommunication.weatherStack.WeatherstackServer;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ResponseToDtoConnector {
 
