@@ -1,51 +1,53 @@
 package badWeatherApp.dataOperations.dataFormater;
 
+import badWeatherApp.dataOperations.dataCalculator.DataCalculator;
 import lombok.AllArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 public class DataFormater {
 
 
-    /*public void displayTheAverageTemperature() {
+    public static String displayTheAverageTemperature(List<Double> valueList) {
         DataCalculator dataCalculatorTemperature = new DataCalculator(0);
-        System.out.println("Tego dnia temperatura wyniesie: " + dataCalculatorTemperature.average(ExampleList.exampleList()) + "°C,");
+        return "Tego dnia temperatura wyniesie: " + dataCalculatorTemperature.average(valueList) + "°C,";
 
     }
 
-    public void displayTheAverageFeltTemperature() {
+    public static String displayTheAverageFeltTemperature(List<Double> valueList) {
         DataCalculator dataCalculatorFeltTemperature = new DataCalculator(0);
-        System.out.println("Temperatura odczuwalna to: " + dataCalculatorFeltTemperature.average(ExampleList.exampleList()) + "°C,");
+        return "Temperatura odczuwalna to: " + dataCalculatorFeltTemperature.average(valueList) + "°C,";
 
     }
 
-    public void displayTheAveragePressure() {
+    public static String displayTheAveragePressure(List<Double> valueList) {
         DataCalculator dataCalculatorPressure = new DataCalculator(0);
-        System.out.println("Średnia wysokość ciśnienia atmosferycznego, będzie równa: " + dataCalculatorPressure.average(ExampleList.exampleList()) + " hPa,");
+        return "Średnia wysokość ciśnienia atmosferycznego, będzie równa: " + dataCalculatorPressure.average(valueList) + " hPa,";
 
     }
 
-    public void displayTheAverageHumidity() {
+    public static String displayTheAverageHumidity(List<Double> valueList) {
         DataCalculator dataCalculatorHumidity = new DataCalculator(0);
-        System.out.println("Wilgotność powietrza wyniesie: " + dataCalculatorHumidity.average(ExampleList.exampleList()) + " %,");
+        return "Wilgotność powietrza wyniesie: " + dataCalculatorHumidity.average(valueList) + " %,";
 
     }
 
-    public void displayTheAverageWindSpeed() {
+    public static String displayTheAverageWindSpeed(List<Double> valueList) {
         DataCalculator dataCalculatorWindSpeed = new DataCalculator(0);
-        System.out.println("Prędkość wiatru to: " + dataCalculatorWindSpeed.average(ExampleList.exampleList()) + " CHYBA W KM/H,");
+        return "Prędkość wiatru to: " + dataCalculatorWindSpeed.average(valueList) + " CHYBA W KM/H,";
 
     }
 
-    public void displayTheAverageWindDir() {
+    public static String displayTheAverageWindDir(List<Double> valueList) {
         DataCalculator dataCalculatorWindDir = new DataCalculator(0);
-        System.out.println("Kierunek wiatru to: " + dataCalculatorWindDir.average(ExampleList.exampleList()) + ",");
+        return "Kierunek wiatru to: " + dataCalculatorWindDir.average(valueList) + ",";
     }
 
-    public void displayWorldDirection() {
+    public static String displayWorldDirection(List<Double> valueList) {
         DataCalculator displayWorldDirection = new DataCalculator(0);
-        System.out.print(displayWorldDirection.worldDirection(DataCalculator.doubleToInt(DataCalculator.averageDegreeDirection(ExampleList.exampleList()))) + ".");
-    }*/
+        return displayWorldDirection.worldDirection(DataCalculator.doubleToInt(DataCalculator.averageDegreeDirection(valueList))) + ".";
+    }
 
 
 }
-
