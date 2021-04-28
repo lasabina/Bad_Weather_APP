@@ -8,10 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @NamedQueries({
-        @NamedQuery(name = Location.FIND_LOCATION_BY_CITY, query = "SELECT e from Location e WHERE e.city = :city ")
-})
-
-@NamedQueries({
+        @NamedQuery(name = Location.FIND_LOCATION_BY_CITY, query = "SELECT e from Location e WHERE e.city = :city "),
         @NamedQuery(name = Location.FIND_LOCATION_BY_COUNTRY, query = "SELECT e from Location e WHERE e.country = :coutry ")
 })
 

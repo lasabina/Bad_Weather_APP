@@ -25,33 +25,26 @@ public class ResponseCollector {
         this.location = location;
     }
 
+    public LocalDateTime getObservationTime() {
+        return requestTime;
+    }
     public int getLocationId() {
         return location.getIdLocation();
     }
-
     public String getCity() {
         return location.getCity();
     }
-
     public String getCountry() {
         return location.getCountry();
     }
-
     public String getRegion() {
         return location.getRegion();
     }
-
     public double getLatitude() {
         return location.getLat();
     }
-
     public double getLongitude() {
         return location.getLon();
-    }
-
-
-    public LocalDateTime getObservationTime() {
-        return requestTime;
     }
 
     public List<Double> getCurrentMeasurements(Measurement measurement) {
@@ -76,20 +69,17 @@ public class ResponseCollector {
                 return null;
         }
     }
-
     private List<Double> getMeasurement(Function<WeatherReadable, Double> function) {
         List<Double> returnValues = new ArrayList<>();
         forecastList.forEach(f -> returnValues.add(function.apply(f)));
         return returnValues;
     }
-
     private List<WeatherReadable> getForecasts() {
         if (forecastList == null) {
             forecastList = getForecastCollection();
         }
         return forecastList;
     }
-
     private List<WeatherReadable> getForecastCollection() {
         List<WeatherReadable> readableList = new ArrayList<>();
         requestServers.forEach(s -> {
@@ -101,7 +91,6 @@ public class ResponseCollector {
         });
         return readableList;
     }
-
     private WeatherReadable getSingleForecast(Requestable server) throws IOException {
         return JsonStringDeserializer.deserialize(server.getCurrentForecastForCity(location.getCity()), server.getResponseClass());
     }
