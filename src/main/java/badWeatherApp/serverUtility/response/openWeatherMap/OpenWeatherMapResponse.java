@@ -6,8 +6,35 @@ import java.time.LocalTime;
 
 public class OpenWeatherMapResponse implements WeatherReadable {
 
+    Coord CoordObject;
     Main MainObject;
     Wind WindObject;
+
+    public class Coord {
+        private float lon;
+        private float lat;
+
+
+        // Getter Methods
+
+        public float getLon() {
+            return lon;
+        }
+
+        public float getLat() {
+            return lat;
+        }
+
+        // Setter Methods
+
+        public void setLon(float lon) {
+            this.lon = lon;
+        }
+
+        public void setLat(float lat) {
+            this.lat = lat;
+        }
+    }
 
     public class Wind {
         private float speed;
@@ -63,6 +90,11 @@ public class OpenWeatherMapResponse implements WeatherReadable {
 
     public void setWind(Wind windObject) {
         this.WindObject = windObject;
+    }
+
+    @Override
+    public String getCity() {
+        return "";
     }
 
     @Override

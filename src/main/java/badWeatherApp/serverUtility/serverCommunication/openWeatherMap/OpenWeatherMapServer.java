@@ -1,5 +1,7 @@
 package badWeatherApp.serverUtility.serverCommunication.openWeatherMap;
 
+import badWeatherApp.serverUtility.response.WeatherReadable;
+import badWeatherApp.serverUtility.response.openWeatherMap.OpenWeatherMapResponse;
 import badWeatherApp.serverUtility.serverCommunication.RequestBuilder;
 import badWeatherApp.serverUtility.serverCommunication.Requestable;
 
@@ -24,5 +26,10 @@ public class OpenWeatherMapServer implements Requestable {
     @Override
     public String getCurrentForecastForCity(String city) throws IOException {
         return RequestBuilder.getResponse(getBaseUrl() + "/weather?q=" + city + "&appid=" + getApiKey()+ "&units=metric");
+    }
+
+    @Override
+    public Class<? extends WeatherReadable> getResponseClass() {
+        return OpenWeatherMapResponse.class;
     }
 }

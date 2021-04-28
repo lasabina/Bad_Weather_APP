@@ -1,24 +1,30 @@
 package badWeatherApp.databaseUtility.forecast.entity;
 
+import badWeatherApp.databaseUtility.location.entity.LocationDTO;
+
 import javax.xml.bind.annotation.XmlRootElement;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @XmlRootElement
 public class ForecastDTO {
 
     private Integer idForecast;
-    private Date observationDate;
-    private Date forecastDate;
+    private LocalDateTime observationDate;
+    private LocalDateTime forecastDate;
     private double temperature;
     private double feelsLike;
     private double preassure;
     private double humidity;
     private double windSpeed;
     private double windDegree;
+    private LocationDTO locationDTO;
 
     public ForecastDTO() {}
 
-    public ForecastDTO(Integer idForecast, Date observationDate, Date forecastDate, double temperature, double feelsLike, double preassure, double humidity, double windSpeed, double windDegree) {
+    public ForecastDTO(Integer idForecast, LocalDateTime observationDate, LocalDateTime forecastDate,
+                       double temperature, double feelsLike, double preassure, double humidity,
+                       double windSpeed, double windDegree, LocationDTO location) {
         this.idForecast = idForecast;
         this.observationDate = observationDate;
         this.forecastDate = forecastDate;
@@ -28,6 +34,7 @@ public class ForecastDTO {
         this.humidity = humidity;
         this.windSpeed = windSpeed;
         this.windDegree = windDegree;
+        this.locationDTO = location;
     }
 
     public Integer getIdForecast() {
@@ -38,19 +45,19 @@ public class ForecastDTO {
         this.idForecast = idForecast;
     }
 
-    public Date getObservationDate() {
+    public LocalDateTime getObservationDate() {
         return observationDate;
     }
 
-    public void setObservationDate(Date observationDate) {
+    public void setObservationDate(LocalDateTime observationDate) {
         this.observationDate = observationDate;
     }
 
-    public Date getForecastDate() {
+    public LocalDateTime getForecastDate() {
         return forecastDate;
     }
 
-    public void setForecastDate(Date forecastDate) {
+    public void setForecastDate(LocalDateTime forecastDate) {
         this.forecastDate = forecastDate;
     }
 
@@ -100,5 +107,13 @@ public class ForecastDTO {
 
     public void setWindDegree(double windDegree) {
         this.windDegree = windDegree;
+    }
+
+    public LocationDTO getLocationDTO() {
+        return locationDTO;
+    }
+
+    public void setLocationDTO(LocationDTO locationDTO) {
+        this.locationDTO = locationDTO;
     }
 }
