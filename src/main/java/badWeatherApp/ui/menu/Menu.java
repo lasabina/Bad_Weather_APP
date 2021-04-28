@@ -1,14 +1,20 @@
 package badWeatherApp.ui.menu;
 
+import badWeatherApp.databaseUtility.forecast.control.ForecastManager;
+import badWeatherApp.databaseUtility.forecast.entity.Forecast;
+import badWeatherApp.databaseUtility.location.control.LocationManager;
+import badWeatherApp.databaseUtility.location.entity.LocationDTO;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
     public void showMenu() {
         System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 4 i zatwierdz ją klawiszem 'enter'.");
-        System.out.println("1. Ulubione");
+        System.out.println("1. Ulubione lokalizacje");
         System.out.println("2. Sprawdz prognoze");
         System.out.println("3. Historia wyszukiwania");
-        System.out.println("4. Ustawienia");
+        System.out.println("4. Ustawienia (W trakcie budowy)");
 
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
@@ -52,7 +58,8 @@ public class Menu {
     }
 
     private void addFavorite() {
-        //todo
+
+//        LocationManager.addLocation();
 
     }
 
@@ -67,17 +74,15 @@ public class Menu {
     }
 
     private void returnToTheMainMenu() {
-        //todo
-
+        showMenu();
     }
 
     private void showForecastWeather() {
         System.out.println("Aby wyszukać prognoze pogody wcisnij liczbę od 1 do 4 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Wyświetl prognoze dla wszystkich ulubionych");
-        System.out.println("2. Podaj miasto");
-        System.out.println("3. Podaj panstwo");
-        System.out.println("4. Podaj wspolrzedne geograficzne");
-        System.out.println("5. Aby powrocic do 'Menu' glownego");
+        System.out.println("2. Podaj prognozę dla miasta");
+        System.out.println("3. Podaj prognozę dla wspolrzędnych geograficznych (Funkcja w budowie)");
+        System.out.println("4. Aby powrocic do 'Menu' glownego");
 
         Scanner scanner = new Scanner(System.in);
         int choiceShowFavorite = scanner.nextInt();
@@ -88,12 +93,11 @@ public class Menu {
             case 2:
                 enterTheCity();
             case 3:
-                enterTheCountry();
-            case 4:
                 enterGeographicCoordinates();
-            case 5:
+            case 4:
                 returnToTheMainMenu();
             default:
+                returnToTheMainMenu();
         }
     }
 
@@ -101,15 +105,7 @@ public class Menu {
         //todo
     }
 
-    private void enterTheCity() {
-        //todo
-
-    }
-
-    private void enterTheCountry() {
-        //todo
-
-    }
+    private void enterTheCity() {}
 
     private void enterGeographicCoordinates() {
         //todo
@@ -117,10 +113,12 @@ public class Menu {
     }
 
     private void showSearchHistory() {
-        System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 3 i zatwierdz ją klawiszem 'enter'.");
-        System.out.println("1. Pokaz historie");
-        System.out.println("2. Wyczysc historie");
-        System.out.println("3. Aby powrocic do 'Menu' glownego");
+        System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 5 i zatwierdz ją klawiszem 'enter'.");
+        System.out.println("1. Pokaz historie dla miasta");
+        System.out.println("2. Pokaz historie dla panstwa");
+        System.out.println("3. Wyczysc historie dla danego miasta");
+        System.out.println("4. Usuń z historii wybraną prognozę");
+        System.out.println("5. Naciśnij, aby powrócić do 'Menu' głównego");
 
         Scanner scanner = new Scanner(System.in);
         int choiceshowSearchHistory = scanner.nextInt();
@@ -128,23 +126,52 @@ public class Menu {
         switch (choiceshowSearchHistory) {
 
             case 1:
-                showMyForecastWeatherHistory();
+                showMyForecastWeatherHistoryByCity();
             case 2:
-                removeMyForecastWeatherHistory();
+                showMyForecastWeatherHistoryByCountry();
             case 3:
+                removeMyForecastWeatherHistorybyCity();
+            case 4:
+                removeMyForecastWeatherHistorybyID();
+            case 5:
                 returnToTheMainMenu();
             default:
+                returnToTheMainMenu();
         }
 
     }
 
-    private void showMyForecastWeatherHistory() {
-        //todo
+    private void removeMyForecastWeatherHistorybyID() {
+        System.out.println("Podaj id prognozy, którą chcesz usunąć");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        ForecastManager.removeForecastbyID(id);
 
     }
 
-    private void removeMyForecastWeatherHistory() {
-        //todo
+    private void removeMyForecastWeatherHistorybyCity() {
+        System.out.println("Podaj miasto, dla którego historia ma zostać usunięta");
+        Scanner scanner = new Scanner(System.in);
+        String city = scanner.nextLine();
+        ForecastManager.removeForecastbyCity(city);
+    }
+
+    private void showMyForecastWeatherHistoryByCountry() {
+        System.out.println("Podaj państwo");
+        Scanner scanner = new Scanner(System.in);
+        String country = scanner.nextLine();
+        for (int i = 0; i < ForecastManager.getForecastByCountry(country).size(); i++) {
+            System.out.print(ForecastManager.getForecastByCountry(country).get(i));
+        }
+    }
+
+    private void showMyForecastWeatherHistoryByCity() {
+        System.out.println("Podaj miasto");
+        Scanner scanner = new Scanner(System.in);
+        String city = scanner.nextLine();
+        for (int i = 0; i < ForecastManager.getForecastByCity(city).size(); i++) {
+            System.out.print(ForecastManager.getForecastByCity(city).get(i));
+        }
     }
 
     private void settings() {
