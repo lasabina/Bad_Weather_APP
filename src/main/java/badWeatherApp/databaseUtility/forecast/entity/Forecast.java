@@ -4,6 +4,7 @@ package badWeatherApp.databaseUtility.forecast.entity;
 import badWeatherApp.databaseUtility.location.entity.Location;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @NamedQueries({
@@ -26,10 +27,10 @@ public class Forecast {
     private Integer idForecast;
 
     @Column(nullable = false)
-    private Date observationDate;
+    private LocalDateTime observationDate;
 
     @Column(nullable = false)
-    private Date forecastDate;
+    private LocalDateTime forecastDate;
 
     @Column(nullable = false)
     private double temperature;
@@ -56,7 +57,7 @@ public class Forecast {
     public Forecast() {
     }
 
-    public Forecast(Date observationDate, Date forecastDate, double temperature, double feelsLike, double preassure, double humidity) {
+    public Forecast(LocalDateTime observationDate, LocalDateTime forecastDate, double temperature, double feelsLike, double preassure, double humidity) {
         this.observationDate = observationDate;
         this.forecastDate = forecastDate;
         this.temperature = temperature;
@@ -64,7 +65,7 @@ public class Forecast {
         this.preassure = preassure;
         this.humidity = humidity;
     }
-    public Forecast(Date observationDate, Date forecastDate, double temperature, double feelsLike, double preassure, double humidity, double windSpeed, double windDegree) {
+    public Forecast(LocalDateTime observationDate, LocalDateTime forecastDate, double temperature, double feelsLike, double preassure, double humidity, double windSpeed, double windDegree) {
         this.observationDate = observationDate;
         this.forecastDate = forecastDate;
         this.temperature = temperature;
@@ -83,19 +84,19 @@ public class Forecast {
         this.idForecast = idForecast;
     }
 
-    public Date getObservationDate() {
+    public LocalDateTime getObservationDate() {
         return observationDate;
     }
 
-    public void setObservationDate(Date observationDate) {
+    public void setObservationDate(LocalDateTime observationDate) {
         this.observationDate = observationDate;
     }
 
-    public Date getForecastDate() {
+    public LocalDateTime getForecastDate() {
         return forecastDate;
     }
 
-    public void setForecastDate(Date forecastDate) {
+    public void setForecastDate(LocalDateTime forecastDate) {
         this.forecastDate = forecastDate;
     }
 

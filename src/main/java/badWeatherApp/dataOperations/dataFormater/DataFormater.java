@@ -1,14 +1,12 @@
 package badWeatherApp.dataOperations.dataFormater;
 
-import badWeatherApp.dataOperations.dataCalculator.DataCalculator;
-import badWeatherApp.dataOperations.dataCalculator.ExampleList;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class DataFormater {
 
 
-    public void displayTheAverageTemperature() {
+    /*public void displayTheAverageTemperature() {
         DataCalculator dataCalculatorTemperature = new DataCalculator(0);
         System.out.println("Tego dnia temperatura wyniesie: " + dataCalculatorTemperature.average(ExampleList.exampleList()) + "°C,");
 
@@ -46,7 +44,7 @@ public class DataFormater {
     public void displayWorldDirection() {
         DataCalculator displayWorldDirection = new DataCalculator(0);
         System.out.print(displayWorldDirection.worldDirection(DataCalculator.doubleToInt(DataCalculator.averageDegreeDirection(ExampleList.exampleList()))) + ".");
-    }
+    }*/
 
 
 }
