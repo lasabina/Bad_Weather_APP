@@ -2,6 +2,7 @@ package badWeatherApp.databaseUtility.forecast.responseToDtoConnector;
 
 import badWeatherApp.dataOperations.dataCalculator.DataCalculator;
 import badWeatherApp.databaseUtility.forecast.entity.ForecastDTO;
+import badWeatherApp.databaseUtility.location.entity.LocationDTO;
 import badWeatherApp.serverUtility.responseCollector.Measurement;
 import badWeatherApp.serverUtility.responseCollector.ResponseCollector;
 
@@ -34,8 +35,7 @@ public class ResponseToDtoConnector {
                 averageHumidity,
                 averageWindSpeed,
                 averageWindDir,
-                null);
-                //locationDTO);
+                new LocationDTO(locationCity));
     }
 
 }

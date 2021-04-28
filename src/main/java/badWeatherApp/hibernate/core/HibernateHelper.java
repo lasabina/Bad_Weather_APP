@@ -13,7 +13,7 @@ public enum HibernateHelper {
 
     HibernateHelper() {
         sessionFactory = new Configuration()
-                .configure("test/hibernate_test.cfg.xml")
+                .configure("production/hibernate.cfg.xml")
                 .addAnnotatedClass(Location.class)
                 .addAnnotatedClass(Forecast.class)
                 .buildSessionFactory();

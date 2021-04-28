@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @NamedQueries({
-        @NamedQuery(name = Location.FIND_LOCATION_BY_CITY, query = "SELECT e from Location e WHERE e.city = :city "),
-        @NamedQuery(name = Location.FIND_LOCATION_BY_COUNTRY, query = "SELECT e from Location e WHERE e.country = :coutry ")
+        @NamedQuery(name = Location.FIND_LOCATION_BY_CITY, query = "SELECT e from Locations e WHERE e.city = :city "),
+        @NamedQuery(name = Location.FIND_LOCATION_BY_COUNTRY, query = "SELECT e from Locations e WHERE e.country = :country ")
 })
 
 @Entity (name = "Locations")
@@ -39,7 +39,7 @@ public class Location {
     private double lon;
 
     @OneToMany (mappedBy = "location")
-    @JoinColumn(name = "Location_id")
+    //@JoinColumn(name = "Location_id")
     private List<Forecast> forecasts;
 
 

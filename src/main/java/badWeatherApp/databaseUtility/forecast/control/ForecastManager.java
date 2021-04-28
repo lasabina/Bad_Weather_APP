@@ -11,6 +11,12 @@ import java.util.List;
 
 public class ForecastManager {
 
+    public static List<Forecast> getAllForecasts() {
+        try (Session session = HibernateHelper.INSTANCE.getSession()) {
+            return session.createQuery("FROM Forecast", Forecast.class).getResultList();
+        }
+    }
+
     public static List<Forecast> getForecastByCity(String city) {
         try (Session session = HibernateHelper.INSTANCE.getSession()) {
             List<Forecast> forecasts = session.createNamedQuery(Forecast.FIND_BY_CITY, Forecast.class)
