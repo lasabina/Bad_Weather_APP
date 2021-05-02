@@ -2,12 +2,10 @@ package badWeatherApp.serverUtility.serverCommunication;
 
 import badWeatherApp.serverUtility.response.WeatherReadable;
 import badWeatherApp.serverUtility.response.OpenWeatherMapResponse;
-import badWeatherApp.serverUtility.serverCommunication.RequestBuilder;
-import badWeatherApp.serverUtility.serverCommunication.Requestable;
 
 import java.io.IOException;
 
-public class OpenWeatherMapServer implements Requestable {
+public class OpenWeatherMapServer implements CurrentWeatherRequestable {
     @Override
     public String getServerName() {
         return "OpenWeatherMap";
@@ -24,12 +22,17 @@ public class OpenWeatherMapServer implements Requestable {
     }
 
     @Override
-    public String getCurrentForecastForCity(String city) throws IOException {
+    public Class<? extends WeatherReadable> getCurrentWeatherResponseClass() {
+        return OpenWeatherMapResponse.class;
+    }
+
+    @Override
+    public String getCurrentWeatherByCity(String city) throws IOException {
         return RequestBuilder.getResponse(getBaseUrl() + "/weather?q=" + city + "&appid=" + getApiKey()+ "&units=metric");
     }
 
     @Override
-    public Class<? extends WeatherReadable> getResponseClass() {
-        return OpenWeatherMapResponse.class;
+    public String getCurrentWeatherByCoordinates(double lat, double lon) throws IOException {
+        return null;
     }
 }

@@ -4,7 +4,6 @@ import badWeatherApp.databaseUtility.location.entity.LocationDTO;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @XmlRootElement
 public class ForecastDTO {
@@ -14,7 +13,7 @@ public class ForecastDTO {
     private LocalDateTime forecastDate;
     private double temperature;
     private double feelsLike;
-    private double preassure;
+    private double pressure;
     private double humidity;
     private double windSpeed;
     private double windDegree;
@@ -23,14 +22,14 @@ public class ForecastDTO {
     public ForecastDTO() {}
 
     public ForecastDTO(Integer idForecast, LocalDateTime observationDate, LocalDateTime forecastDate,
-                       double temperature, double feelsLike, double preassure, double humidity,
+                       double temperature, double feelsLike, double pressure, double humidity,
                        double windSpeed, double windDegree, LocationDTO location) {
         this.idForecast = idForecast;
         this.observationDate = observationDate;
         this.forecastDate = forecastDate;
         this.temperature = temperature;
         this.feelsLike = feelsLike;
-        this.preassure = preassure;
+        this.pressure = pressure;
         this.humidity = humidity;
         this.windSpeed = windSpeed;
         this.windDegree = windDegree;
@@ -77,12 +76,12 @@ public class ForecastDTO {
         this.feelsLike = feelsLike;
     }
 
-    public double getPreassure() {
-        return preassure;
+    public double getPressure() {
+        return pressure;
     }
 
-    public void setPreassure(double preassure) {
-        this.preassure = preassure;
+    public void setPressure(double pressure) {
+        this.pressure = pressure;
     }
 
     public double getHumidity() {

@@ -2,12 +2,11 @@ package badWeatherApp.serverUtility.serverCommunication;
 
 import badWeatherApp.serverUtility.response.WeatherReadable;
 import badWeatherApp.serverUtility.response.WeatherstackResponse;
-import badWeatherApp.serverUtility.serverCommunication.RequestBuilder;
-import badWeatherApp.serverUtility.serverCommunication.Requestable;
 
 import java.io.IOException;
 
-public class WeatherstackServer implements Requestable {
+public class WeatherstackServer implements CurrentWeatherRequestable, ForecastWeatherRequestable {
+
     @Override
     public String getServerName() {
         return "WeatherStack";
@@ -24,12 +23,27 @@ public class WeatherstackServer implements Requestable {
     }
 
     @Override
-    public String getCurrentForecastForCity(String city) throws IOException {
+    public Class<? extends WeatherReadable> getCurrentWeatherResponseClass() {
+        return WeatherstackResponse.class;
+    }
+
+    @Override
+    public String getCurrentWeatherByCity(String city) throws IOException {
         return RequestBuilder.getResponse(getBaseUrl() + "current?access_key=" + getApiKey() + "&query=" + city);
     }
 
     @Override
-    public Class<? extends WeatherReadable> getResponseClass() {
-        return WeatherstackResponse.class;
+    public String getCurrentWeatherByCoordinates(double lat, double lon) throws IOException {
+        return RequestBuilder.getResponse(getBaseUrl() + "current?access_key=" + getApiKey() + "&query=" + lat + "," + lon);
+    }
+
+    @Override
+    public String getForecastByCity(String city) throws IOException {
+        return null;
+    }
+
+    @Override
+    public String getForecastByCoordinates(double lon, double lat) throws IOException {
+        return null;
     }
 }

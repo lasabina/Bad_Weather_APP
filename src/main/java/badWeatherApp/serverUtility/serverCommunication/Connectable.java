@@ -4,11 +4,9 @@ import badWeatherApp.serverUtility.response.WeatherReadable;
 
 import java.io.IOException;
 
-public interface Requestable {
+public interface Connectable {
 
     String getServerName();
     String getBaseUrl();
     String getApiKey();
-    String getCurrentForecastForCity(String city) throws IOException;
-    Class<? extends WeatherReadable> getResponseClass();
-}
+    }

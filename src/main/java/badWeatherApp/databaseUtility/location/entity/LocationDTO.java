@@ -19,6 +19,11 @@ public class LocationDTO {
         this.city = city;
     }
 
+    public LocationDTO(double lat, double lon) {
+        this.lat = lat;
+        this.lon = lon;
+    }
+
     public LocationDTO(int idLocation, String city, String country, String region, double lat, double lon) {
         this.idLocation = idLocation;
         this.city = city;

@@ -14,12 +14,12 @@ public class ResponseToDtoConnector {
 
         DataCalculator dc = new DataCalculator(1);
 
-        double averageTemp = dc.average(rc.getCurrentMeasurements(Measurement.TEMPERATURE));
-        double averageFeelsLikeTemp = dc.average(rc.getCurrentMeasurements(Measurement.FEELS_LIKE));
-        double averageWindSpeed = dc.average(rc.getCurrentMeasurements(Measurement.WIND_SPEED));
-        double averageWindDir = dc.average(rc.getCurrentMeasurements(Measurement.WIND_DIRECTION));
-        double averagePressure = dc.average(rc.getCurrentMeasurements(Measurement.PRESSURE));
-        double averageHumidity = dc.average(rc.getCurrentMeasurements(Measurement.HUMIDITY));
+        double averageTemp = dc.average(rc.getMeasurement(Measurement.TEMPERATURE));
+        double averageFeelsLikeTemp = dc.average(rc.getMeasurement(Measurement.FEELS_LIKE));
+        double averageWindSpeed = dc.average(rc.getMeasurement(Measurement.WIND_SPEED));
+        double averageWindDir = dc.average(rc.getMeasurement(Measurement.WIND_DIRECTION));
+        double averagePressure = dc.average(rc.getMeasurement(Measurement.PRESSURE));
+        double averageHumidity = dc.average(rc.getMeasurement(Measurement.HUMIDITY));
 
         String locationCity = rc.getCity();
         LocalDateTime observationTime = rc.getObservationTime();
