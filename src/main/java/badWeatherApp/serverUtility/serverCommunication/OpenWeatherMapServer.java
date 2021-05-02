@@ -1,7 +1,7 @@
 package badWeatherApp.serverUtility.serverCommunication;
 
-import badWeatherApp.serverUtility.response.WeatherReadable;
 import badWeatherApp.serverUtility.response.OpenWeatherMapResponse;
+import badWeatherApp.serverUtility.response.WeatherReadable;
 
 import java.io.IOException;
 
@@ -28,11 +28,11 @@ public class OpenWeatherMapServer implements CurrentWeatherRequestable {
 
     @Override
     public String getCurrentWeatherByCity(String city) throws IOException {
-        return RequestBuilder.getResponse(getBaseUrl() + "/weather?q=" + city + "&appid=" + getApiKey()+ "&units=metric");
+        return RequestBuilder.getResponse(getBaseUrl() + "/weather?q=" + city + "&appid=" + getApiKey() + "&units=metric");
     }
 
     @Override
     public String getCurrentWeatherByCoordinates(double lat, double lon) throws IOException {
-        return null;
+        return RequestBuilder.getResponse(getBaseUrl() + "weather?lat=" + lat + "&lon=" + lon + "&appid=" + getApiKey() + "&units=metric");
     }
 }

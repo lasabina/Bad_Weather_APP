@@ -156,14 +156,14 @@ public class Menu {
         List<Connectable> serverList = new ArrayList<>();
 
         serverList.add(new WeatherstackServer());
-//        serverList.add(new OpenWeatherMapServer());
+        serverList.add(new OpenWeatherMapServer());
 
         ResponseCollector rc = new ResponseCollector(serverList, new LocationDTO(lat,lon), ForecastType.FORECAST);
         ForecastDTO forecast = ResponseToDtoConnector.createForecastDTOFromResponse(rc);
 
         System.out.println("-------------------------------");
         System.out.println(forecast.getForecastDate());
-        System.out.println(forecast.getLocationDTO().getCity());
+        System.out.println(forecast.getLocationDTO().getLat() + " , " + forecast.getLocationDTO().getLon());
         System.out.println(DataFormater.displayTheAverageTemperature(forecast.getTemperature()));
         System.out.println(DataFormater.displayTheAverageFeltTemperature(forecast.getFeelsLike()));
         System.out.println(DataFormater.displayTheAverageWindSpeed(forecast.getWindSpeed()));

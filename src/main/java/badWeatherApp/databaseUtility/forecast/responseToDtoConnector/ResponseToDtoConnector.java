@@ -21,10 +21,16 @@ public class ResponseToDtoConnector {
         double averagePressure = dc.average(rc.getMeasurement(Measurement.PRESSURE));
         double averageHumidity = dc.average(rc.getMeasurement(Measurement.HUMIDITY));
 
-        String locationCity = rc.getCity();
         LocalDateTime observationTime = rc.getObservationTime();
 
-        //LocationDTO locationDTO = new LocationDTO(null,city,country,region,lat,lon);
+        LocationDTO locationDTO;
+
+        if (rc.getCity() != null) {
+            locationDTO = new LocationDTO(rc.getCity());
+        } else {
+            locationDTO = new LocationDTO(rc.getLatitude(), rc.getLongitude());
+        }
+
 
         return new ForecastDTO(null,
                 observationTime,
@@ -35,7 +41,7 @@ public class ResponseToDtoConnector {
                 averageHumidity,
                 averageWindSpeed,
                 averageWindDir,
-                new LocationDTO(locationCity));
+                locationDTO);
     }
 
 }

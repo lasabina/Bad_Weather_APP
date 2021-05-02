@@ -31,6 +31,10 @@ public class ResponseCollector {
         return requestTime;
     }
 
+    public ForecastType getForecastType() {
+        return forecastType;
+    }
+
     //LOCATION GETTERS
     public int getLocationId() {
         return location.getIdLocation();
