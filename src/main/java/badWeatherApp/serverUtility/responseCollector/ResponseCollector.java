@@ -5,6 +5,7 @@ import badWeatherApp.serverUtility.json.JsonStringDeserializer;
 import badWeatherApp.serverUtility.response.WeatherReadable;
 import badWeatherApp.serverUtility.serverCommunication.Connectable;
 import badWeatherApp.serverUtility.serverCommunication.CurrentWeatherRequestable;
+import badWeatherApp.serverUtility.serverCommunication.ForecastWeatherRequestable;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -99,30 +100,52 @@ public class ResponseCollector {
 
     private List<WeatherReadable> getForecastCollection() {
         List<WeatherReadable> readableList = new ArrayList<>();
-        requestServers.forEach(s -> {
-            if (s instanceof CurrentWeatherRequestable)
-                try {
-                    switch (forecastType) {
-                        case CURRENT:
-                            readableList.add(getSingleForecastByCity((CurrentWeatherRequestable) s));
-                            break;
-                        case FORECAST:
-                            readableList.add(getSingleForecastByCoordinates((CurrentWeatherRequestable) s));
-                            break;
+
+        switch (forecastType) {
+            case CURRENT:
+                requestServers.forEach(s -> {
+                    if (s instanceof CurrentWeatherRequestable) {
+                        try {
+                            readableList.add(getCurrentWeather((CurrentWeatherRequestable) s));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-        });
+                });
+            case FORECAST:
+                requestServers.forEach(s -> {
+                    if (s instanceof ForecastWeatherRequestable) {
+                        try {
+                            readableList.add(getForecast((ForecastWeatherRequestable) s));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        }
+
         return readableList;
     }
 
-    private WeatherReadable getSingleForecastByCity(CurrentWeatherRequestable server) throws IOException {
-        return JsonStringDeserializer.deserialize(server.getCurrentWeatherByCity(location.getCity()), server.getCurrentWeatherResponseClass());
+    private WeatherReadable getCurrentWeather(CurrentWeatherRequestable server) throws IOException {
+        switch (location.getInputType()) {
+            case BY_CITY:
+                return JsonStringDeserializer.deserialize(server.getCurrentWeatherByCity(location.getCity()), server.getCurrentWeatherResponseClass());
+            case BY_COORDINATES:
+                return JsonStringDeserializer.deserialize(server.getCurrentWeatherByCoordinates(getLatitude(), getLongitude()), server.getCurrentWeatherResponseClass());
+            default:
+                return null;
+        }
     }
 
-    private WeatherReadable getSingleForecastByCoordinates(CurrentWeatherRequestable server) throws IOException {
-        return JsonStringDeserializer.deserialize(server.getCurrentWeatherByCoordinates(location.getLat(), location.getLon()), server.getCurrentWeatherResponseClass());
+    private WeatherReadable getForecast(ForecastWeatherRequestable server) throws IOException {
+        switch (location.getInputType()) {
+            case BY_CITY:
+                return JsonStringDeserializer.deserialize(server.getForecastByCity(getCity()), server.getForecastResponseClass());
+            case BY_COORDINATES:
+                return JsonStringDeserializer.deserialize(server.getForecastByCoordinates(getLatitude(), getLongitude()), server.getForecastResponseClass());
+            default:
+                return null;
+        }
     }
-
 }

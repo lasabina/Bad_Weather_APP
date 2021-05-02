@@ -39,11 +39,16 @@ public class WeatherstackServer implements CurrentWeatherRequestable, ForecastWe
 
     @Override
     public String getForecastByCity(String city) throws IOException {
-        return null;
+        return RequestBuilder.getResponse(getBaseUrl() + "forecast?access_key=" + getApiKey() + "&query=" + city + "&forecast_days=7&hourly=0");
     }
 
     @Override
     public String getForecastByCoordinates(double lon, double lat) throws IOException {
+        return RequestBuilder.getResponse(getBaseUrl() + "forecast?access_key=" + getApiKey() + "&query=" + lat + "," + lon + "&forecast_days=7&hourly=0");
+    }
+
+    @Override
+    public Class<? extends WeatherReadable> getForecastResponseClass() {
         return null;
     }
 }

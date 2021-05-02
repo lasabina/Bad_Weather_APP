@@ -1,6 +1,8 @@
 package badWeatherApp.databaseUtility.location.entity;
 
 
+import badWeatherApp.serverUtility.responseCollector.LocationType;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -12,16 +14,19 @@ public class LocationDTO {
     private String region;
     private double lat;
     private double lon;
+    private LocationType inputType;
 
     public LocationDTO() {}
 
     public LocationDTO(String city) {
         this.city = city;
+        this.inputType = LocationType.BY_CITY;
     }
 
     public LocationDTO(double lat, double lon) {
         this.lat = lat;
         this.lon = lon;
+        this.inputType = LocationType.BY_COORDINATES;
     }
 
     public LocationDTO(int idLocation, String city, String country, String region, double lat, double lon) {
@@ -79,5 +84,9 @@ public class LocationDTO {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public LocationType getInputType() {
+        return inputType;
     }
 }
