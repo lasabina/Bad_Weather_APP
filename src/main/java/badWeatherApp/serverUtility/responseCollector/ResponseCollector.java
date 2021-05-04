@@ -112,6 +112,7 @@ public class ResponseCollector {
                         }
                     }
                 });
+                break;
             case FORECAST:
                 requestServers.forEach(s -> {
                     if (s instanceof ForecastWeatherRequestable) {
@@ -122,6 +123,7 @@ public class ResponseCollector {
                         }
                     }
                 });
+                break;
         }
 
         return readableList;

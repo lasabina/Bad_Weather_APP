@@ -1,6 +1,6 @@
 package badWeatherApp.serverUtility.serverCommunication;
 
-import badWeatherApp.serverUtility.response.OpenWeatherCurrentMapResponse;
+import badWeatherApp.serverUtility.response.OpenWeatherCurrentResponse;
 import badWeatherApp.serverUtility.response.OpenWeatherForecastResponse;
 import badWeatherApp.serverUtility.response.WeatherReadable;
 
@@ -24,7 +24,7 @@ public class OpenWeatherMapServer implements CurrentWeatherRequestable, Forecast
 
     @Override
     public Class<? extends WeatherReadable> getCurrentWeatherResponseClass() {
-        return OpenWeatherCurrentMapResponse.class;
+        return OpenWeatherCurrentResponse.class;
     }
 
     @Override
