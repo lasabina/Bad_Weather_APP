@@ -1,11 +1,12 @@
 package badWeatherApp.serverUtility.serverCommunication;
 
-import badWeatherApp.serverUtility.response.OpenWeatherMapResponse;
+import badWeatherApp.serverUtility.response.OpenWeatherCurrentMapResponse;
+import badWeatherApp.serverUtility.response.OpenWeatherForecastResponse;
 import badWeatherApp.serverUtility.response.WeatherReadable;
 
 import java.io.IOException;
 
-public class OpenWeatherMapServer implements CurrentWeatherRequestable {
+public class OpenWeatherMapServer implements CurrentWeatherRequestable, ForecastWeatherRequestable {
     @Override
     public String getServerName() {
         return "OpenWeatherMap";
@@ -23,7 +24,7 @@ public class OpenWeatherMapServer implements CurrentWeatherRequestable {
 
     @Override
     public Class<? extends WeatherReadable> getCurrentWeatherResponseClass() {
-        return OpenWeatherMapResponse.class;
+        return OpenWeatherCurrentMapResponse.class;
     }
 
     @Override
@@ -34,5 +35,21 @@ public class OpenWeatherMapServer implements CurrentWeatherRequestable {
     @Override
     public String getCurrentWeatherByCoordinates(double lat, double lon) throws IOException {
         return RequestBuilder.getResponse(getBaseUrl() + "weather?lat=" + lat + "&lon=" + lon + "&appid=" + getApiKey() + "&units=metric");
+    }
+
+    @Override
+    public String getForecastByCity(String city) throws IOException {
+        return null;
+    }
+
+    @Override
+    public String getForecastByCoordinates(double lat, double lon) throws IOException {
+        return RequestBuilder.getResponse(getBaseUrl() + "onecall?lat=" + lat + "&lon=" + lon + "&exclude=current,minutely,hourly,alerts" +
+                "&appid=" + getApiKey() + "&units=metric");
+    }
+
+    @Override
+    public Class<? extends WeatherReadable> getForecastResponseClass() {
+        return OpenWeatherForecastResponse.class;
     }
 }

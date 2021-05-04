@@ -4,7 +4,7 @@ import badWeatherApp.serverUtility.response.WeatherReadable;
 
 import java.time.LocalTime;
 
-public class WeatherstackResponse implements WeatherReadable {
+public class WeatherstackCurrentResponse implements WeatherReadable {
 
     Current current;
     Location locationObject;
@@ -128,7 +128,7 @@ public class WeatherstackResponse implements WeatherReadable {
         }
     }
 
-    public WeatherstackResponse() {
+    public WeatherstackCurrentResponse() {
     }
 
     @Override

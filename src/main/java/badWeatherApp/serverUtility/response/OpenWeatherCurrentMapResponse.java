@@ -4,7 +4,7 @@ import badWeatherApp.serverUtility.response.WeatherReadable;
 
 import java.time.LocalTime;
 
-public class OpenWeatherMapResponse implements WeatherReadable {
+public class OpenWeatherCurrentMapResponse implements WeatherReadable {
 
     Coord coordObject;
     Main mainObject;
