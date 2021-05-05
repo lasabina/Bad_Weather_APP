@@ -7,7 +7,7 @@ import badWeatherApp.databaseUtility.forecast.entity.ForecastDTO;
 import badWeatherApp.databaseUtility.forecast.responseToDtoConnector.ResponseToDtoConnector;
 import badWeatherApp.databaseUtility.location.entity.LocationDTO;
 import badWeatherApp.serverUtility.responseCollector.ForecastType;
-import badWeatherApp.serverUtility.responseCollector.ResponseCollector;
+import badWeatherApp.serverUtility.responseCollector.current.CurrentResponseCollector;
 import badWeatherApp.serverUtility.serverCommunication.Connectable;
 import badWeatherApp.serverUtility.serverCommunication.OpenWeatherMapServer;
 import badWeatherApp.serverUtility.serverCommunication.WeatherstackServer;
@@ -129,7 +129,7 @@ public class Menu {
                 new OpenWeatherMapServer()
         ));
 
-        ResponseCollector rc = new ResponseCollector(serverList, new LocationDTO(city), ForecastType.CURRENT);
+        CurrentResponseCollector rc = new CurrentResponseCollector(serverList, new LocationDTO(city), ForecastType.CURRENT);
         ForecastDTO forecast = ResponseToDtoConnector.createForecastDTOFromResponse(rc);
 
         System.out.println("-------------------------------");
@@ -158,7 +158,7 @@ public class Menu {
         serverList.add(new WeatherstackServer());
         serverList.add(new OpenWeatherMapServer());
 
-        ResponseCollector rc = new ResponseCollector(serverList, new LocationDTO(lat,lon), ForecastType.FORECAST);
+        CurrentResponseCollector rc = new CurrentResponseCollector(serverList, new LocationDTO(lat,lon), ForecastType.FORECAST);
         ForecastDTO forecast = ResponseToDtoConnector.createForecastDTOFromResponse(rc);
 
         System.out.println("-------------------------------");

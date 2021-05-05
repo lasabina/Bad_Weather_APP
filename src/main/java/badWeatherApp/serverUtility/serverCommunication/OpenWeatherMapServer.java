@@ -1,8 +1,9 @@
 package badWeatherApp.serverUtility.serverCommunication;
 
-import badWeatherApp.serverUtility.response.OpenWeatherCurrentResponse;
-import badWeatherApp.serverUtility.response.OpenWeatherForecastResponse;
-import badWeatherApp.serverUtility.response.WeatherReadable;
+import badWeatherApp.serverUtility.response.forecast.ForecastWeatherReadable;
+import badWeatherApp.serverUtility.response.current.OpenCurrentWeatherCurrentResponse;
+import badWeatherApp.serverUtility.response.forecast.OpenWeatherForecastResponse;
+import badWeatherApp.serverUtility.response.current.CurrentWeatherReadable;
 
 import java.io.IOException;
 
@@ -23,8 +24,8 @@ public class OpenWeatherMapServer implements CurrentWeatherRequestable, Forecast
     }
 
     @Override
-    public Class<? extends WeatherReadable> getCurrentWeatherResponseClass() {
-        return OpenWeatherCurrentResponse.class;
+    public Class<? extends CurrentWeatherReadable> getCurrentWeatherResponseClass() {
+        return OpenCurrentWeatherCurrentResponse.class;
     }
 
     @Override
@@ -49,7 +50,9 @@ public class OpenWeatherMapServer implements CurrentWeatherRequestable, Forecast
     }
 
     @Override
-    public Class<? extends WeatherReadable> getForecastResponseClass() {
+    public Class<? extends ForecastWeatherReadable> getForecastResponseClass() {
         return OpenWeatherForecastResponse.class;
     }
+
+
 }

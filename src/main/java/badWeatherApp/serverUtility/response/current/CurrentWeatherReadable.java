@@ -1,8 +1,8 @@
-package badWeatherApp.serverUtility.response;
+package badWeatherApp.serverUtility.response.current;
 
 import java.time.LocalTime;
 
-public interface WeatherReadable {
+public interface CurrentWeatherReadable {
 
     String getCity();
     String getCountry();

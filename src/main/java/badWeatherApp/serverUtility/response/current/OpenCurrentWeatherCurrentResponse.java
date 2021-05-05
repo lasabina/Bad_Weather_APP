@@ -1,11 +1,12 @@
-package badWeatherApp.serverUtility.response;
+package badWeatherApp.serverUtility.response.current;
 
+import badWeatherApp.serverUtility.response.current.CurrentWeatherReadable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalTime;
 
-public class OpenWeatherCurrentResponse implements WeatherReadable {
+public class OpenCurrentWeatherCurrentResponse implements CurrentWeatherReadable {
 
     Coordinate coordinate;
     Current current;
@@ -13,10 +14,10 @@ public class OpenWeatherCurrentResponse implements WeatherReadable {
     Location location;
 
     @JsonCreator
-    public OpenWeatherCurrentResponse(@JsonProperty("coord") Coordinate coordinate,
-                                      @JsonProperty("main") Current current,
-                                      @JsonProperty("wind") Wind wind,
-                                      @JsonProperty("sys") Location location) {
+    public OpenCurrentWeatherCurrentResponse(@JsonProperty("coord") Coordinate coordinate,
+                                             @JsonProperty("main") Current current,
+                                             @JsonProperty("wind") Wind wind,
+                                             @JsonProperty("sys") Location location) {
         this.coordinate = coordinate;
         this.current = current;
         this.wind = wind;

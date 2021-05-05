@@ -1,10 +1,10 @@
-package badWeatherApp.serverUtility.response;
+package badWeatherApp.serverUtility.response.current;
 
-import badWeatherApp.serverUtility.response.WeatherReadable;
+import badWeatherApp.serverUtility.response.current.CurrentWeatherReadable;
 
 import java.time.LocalTime;
 
-public class WeatherstackCurrentResponse implements WeatherReadable {
+public class WeatherstackCurrentResponse implements CurrentWeatherReadable {
 
     Current current;
     Location locationObject;

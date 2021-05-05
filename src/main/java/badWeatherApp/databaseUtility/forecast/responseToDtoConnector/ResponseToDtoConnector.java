@@ -3,23 +3,23 @@ package badWeatherApp.databaseUtility.forecast.responseToDtoConnector;
 import badWeatherApp.dataOperations.dataCalculator.DataCalculator;
 import badWeatherApp.databaseUtility.forecast.entity.ForecastDTO;
 import badWeatherApp.databaseUtility.location.entity.LocationDTO;
-import badWeatherApp.serverUtility.responseCollector.Measurement;
-import badWeatherApp.serverUtility.responseCollector.ResponseCollector;
+import badWeatherApp.serverUtility.responseCollector.current.CurrentMeasurement;
+import badWeatherApp.serverUtility.responseCollector.current.CurrentResponseCollector;
 
 import java.time.LocalDateTime;
 
 public class ResponseToDtoConnector {
 
-    public static ForecastDTO createForecastDTOFromResponse(ResponseCollector rc) {
+    public static ForecastDTO createForecastDTOFromResponse(CurrentResponseCollector rc) {
 
         DataCalculator dc = new DataCalculator(1);
 
-        double averageTemp = dc.average(rc.getMeasurement(Measurement.TEMPERATURE));
-        double averageFeelsLikeTemp = dc.average(rc.getMeasurement(Measurement.FEELS_LIKE));
-        double averageWindSpeed = dc.average(rc.getMeasurement(Measurement.WIND_SPEED));
-        double averageWindDir = dc.average(rc.getMeasurement(Measurement.WIND_DIRECTION));
-        double averagePressure = dc.average(rc.getMeasurement(Measurement.PRESSURE));
-        double averageHumidity = dc.average(rc.getMeasurement(Measurement.HUMIDITY));
+        double averageTemp = dc.average(rc.getCurrentMeasurementFunction(CurrentMeasurement.TEMPERATURE));
+        double averageFeelsLikeTemp = dc.average(rc.getCurrentMeasurementFunction(CurrentMeasurement.FEELS_LIKE));
+        double averageWindSpeed = dc.average(rc.getCurrentMeasurementFunction(CurrentMeasurement.WIND_SPEED));
+        double averageWindDir = dc.average(rc.getCurrentMeasurementFunction(CurrentMeasurement.WIND_DIRECTION));
+        double averagePressure = dc.average(rc.getCurrentMeasurementFunction(CurrentMeasurement.PRESSURE));
+        double averageHumidity = dc.average(rc.getCurrentMeasurementFunction(CurrentMeasurement.HUMIDITY));
 
         LocalDateTime observationTime = rc.getObservationTime();
 

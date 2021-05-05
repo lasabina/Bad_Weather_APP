@@ -1,6 +1,6 @@
-package badWeatherApp.serverUtility.responseCollector;
+package badWeatherApp.serverUtility.responseCollector.current;
 
-public enum Measurement {
+public enum CurrentMeasurement {
     TEMPERATURE,
     FEELS_LIKE,
     WIND_SPEED,
