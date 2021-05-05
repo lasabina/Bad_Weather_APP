@@ -1,13 +1,13 @@
 package badWeatherApp.serverUtility.serverCommunication;
 
-import badWeatherApp.serverUtility.response.WeatherReadable;
-import badWeatherApp.serverUtility.response.WeatherstackResponse;
-import badWeatherApp.serverUtility.serverCommunication.RequestBuilder;
-import badWeatherApp.serverUtility.serverCommunication.Requestable;
+import badWeatherApp.serverUtility.response.current.CurrentWeatherReadable;
+import badWeatherApp.serverUtility.response.forecast.ForecastWeatherReadable;
+import badWeatherApp.serverUtility.response.current.WeatherstackCurrentResponse;
 
 import java.io.IOException;
 
-public class WeatherstackServer implements Requestable {
+public class WeatherstackServer implements CurrentWeatherRequestable, ForecastWeatherRequestable {
+
     @Override
     public String getServerName() {
         return "WeatherStack";
@@ -24,12 +24,32 @@ public class WeatherstackServer implements Requestable {
     }
 
     @Override
-    public String getCurrentForecastForCity(String city) throws IOException {
+    public Class<? extends CurrentWeatherReadable> getCurrentWeatherResponseClass() {
+        return WeatherstackCurrentResponse.class;
+    }
+
+    @Override
+    public String getCurrentWeatherByCity(String city) throws IOException {
         return RequestBuilder.getResponse(getBaseUrl() + "current?access_key=" + getApiKey() + "&query=" + city);
     }
 
     @Override
-    public Class<? extends WeatherReadable> getResponseClass() {
-        return WeatherstackResponse.class;
+    public String getCurrentWeatherByCoordinates(double lat, double lon) throws IOException {
+        return RequestBuilder.getResponse(getBaseUrl() + "current?access_key=" + getApiKey() + "&query=" + lat + "," + lon);
+    }
+
+    @Override
+    public String getForecastByCity(String city) throws IOException {
+        return RequestBuilder.getResponse(getBaseUrl() + "forecast?access_key=" + getApiKey() + "&query=" + city + "&forecast_days=7&hourly=0");
+    }
+
+    @Override
+    public String getForecastByCoordinates(double lon, double lat) throws IOException {
+        return RequestBuilder.getResponse(getBaseUrl() + "forecast?access_key=" + getApiKey() + "&query=" + lat + "," + lon + "&forecast_days=7&hourly=0");
+    }
+
+    @Override
+    public Class<? extends ForecastWeatherReadable> getForecastResponseClass() {
+        return null;
     }
 }

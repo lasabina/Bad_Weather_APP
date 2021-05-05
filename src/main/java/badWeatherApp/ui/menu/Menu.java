@@ -6,12 +6,12 @@ import badWeatherApp.databaseUtility.forecast.entity.Forecast;
 import badWeatherApp.databaseUtility.forecast.entity.ForecastDTO;
 import badWeatherApp.databaseUtility.forecast.responseToDtoConnector.ResponseToDtoConnector;
 import badWeatherApp.databaseUtility.location.entity.LocationDTO;
-import badWeatherApp.serverUtility.responseCollector.ResponseCollector;
+import badWeatherApp.serverUtility.responseCollector.ForecastType;
+import badWeatherApp.serverUtility.responseCollector.current.CurrentResponseCollector;
+import badWeatherApp.serverUtility.serverCommunication.Connectable;
 import badWeatherApp.serverUtility.serverCommunication.OpenWeatherMapServer;
-import badWeatherApp.serverUtility.serverCommunication.Requestable;
 import badWeatherApp.serverUtility.serverCommunication.WeatherstackServer;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,6 +37,7 @@ public class Menu {
             case 4:
                 settings();
             default:
+                returnToTheMainMenu();
         }
 
     }
@@ -54,10 +55,13 @@ public class Menu {
         switch (choiceShowFavorite) {
             case 1:
                 addFavorite();
+                showFavorite();
             case 2:
                 removeFavorite();
+                showFavorite();
             case 3:
                 editFavorite();
+                showFavorite();
             case 4:
                 returnToTheMainMenu();
             default:
@@ -98,12 +102,14 @@ public class Menu {
         switch (choiceShowFavorite) {
             case 1:
                 showFavoriteForecastWeather();
+                showForecastWeather();
             case 2:
                 enterTheCity();
+                showForecastWeather();
             case 3:
                 enterGeographicCoordinates();
+                showForecastWeather();
             case 4:
-                returnToTheMainMenu();
             default:
                 returnToTheMainMenu();
         }
@@ -118,12 +124,12 @@ public class Menu {
         System.out.println("Podaj miasto: ");
         String city = scanner.nextLine();
 
-        List<Requestable> serverList = new ArrayList<>(List.of(
+        List<Connectable> serverList = new ArrayList<>(List.of(
                 new WeatherstackServer(),
                 new OpenWeatherMapServer()
         ));
 
-        ResponseCollector rc = new ResponseCollector(serverList, new LocationDTO(city));
+        CurrentResponseCollector rc = new CurrentResponseCollector(serverList, new LocationDTO(city), ForecastType.CURRENT);
         ForecastDTO forecast = ResponseToDtoConnector.createForecastDTOFromResponse(rc);
 
         System.out.println("-------------------------------");
@@ -134,14 +140,39 @@ public class Menu {
         System.out.println(DataFormater.displayTheAverageWindSpeed(forecast.getWindSpeed()));
         System.out.println(DataFormater.displayWorldDirection(forecast.getWindDegree()));
         System.out.println(DataFormater.displayTheAverageHumidity(forecast.getHumidity()));
-        System.out.println(DataFormater.displayTheAveragePressure(forecast.getPreassure()));
+        System.out.println(DataFormater.displayTheAveragePressure(forecast.getPressure()));
         System.out.println("-------------------------------");
 
         ForecastManager.addForecast(forecast);
     }
 
     private void enterGeographicCoordinates() {
-        //todo
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj szerokość geograficzną: ");
+        double lat = scanner.nextDouble();
+        System.out.println("Podaj długość geograficzną: ");
+        double lon = scanner.nextDouble();
+
+        List<Connectable> serverList = new ArrayList<>();
+
+        serverList.add(new WeatherstackServer());
+        serverList.add(new OpenWeatherMapServer());
+
+        CurrentResponseCollector rc = new CurrentResponseCollector(serverList, new LocationDTO(lat,lon), ForecastType.FORECAST);
+        ForecastDTO forecast = ResponseToDtoConnector.createForecastDTOFromResponse(rc);
+
+        System.out.println("-------------------------------");
+        System.out.println(forecast.getForecastDate());
+        System.out.println(forecast.getLocationDTO().getLat() + " , " + forecast.getLocationDTO().getLon());
+        System.out.println(DataFormater.displayTheAverageTemperature(forecast.getTemperature()));
+        System.out.println(DataFormater.displayTheAverageFeltTemperature(forecast.getFeelsLike()));
+        System.out.println(DataFormater.displayTheAverageWindSpeed(forecast.getWindSpeed()));
+        System.out.println(DataFormater.displayWorldDirection(forecast.getWindDegree()));
+        System.out.println(DataFormater.displayTheAverageHumidity(forecast.getHumidity()));
+        System.out.println(DataFormater.displayTheAveragePressure(forecast.getPressure()));
+        System.out.println("-------------------------------");
+
+        ForecastManager.addForecast(forecast);
 
     }
 
@@ -162,16 +193,20 @@ public class Menu {
                 for (Forecast allForecast : ForecastManager.getAllForecasts()) {
                     System.out.println(allForecast);
                 }
+                showSearchHistory();
             case 2:
                 showMyForecastWeatherHistoryByCity();
+                showSearchHistory();
             case 3:
                 showMyForecastWeatherHistoryByCountry();
+                showSearchHistory();
             case 4:
                 removeMyForecastWeatherHistorybyCity();
+                showSearchHistory();
             case 5:
                 removeMyForecastWeatherHistorybyID();
+                showSearchHistory();
             case 6:
-                returnToTheMainMenu();
             default:
                 returnToTheMainMenu();
         }
