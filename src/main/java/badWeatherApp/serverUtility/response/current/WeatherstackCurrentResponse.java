@@ -1,182 +1,116 @@
 package badWeatherApp.serverUtility.response.current;
 
-import badWeatherApp.serverUtility.response.current.CurrentWeatherReadable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalTime;
 
 public class WeatherstackCurrentResponse implements CurrentWeatherReadable {
 
     Current current;
-    Location locationObject;
+    Location location;
 
-    public class Current {
+    private static class Current {
 
-        private String observation_time;
-        private int temperature;
-        private int wind_speed;
-        private int wind_degree;
-        private int pressure;
-        private int humidity;
-        private int feelslike;
+        private final String observationTime;
+        private final int temperature;
+        private final int windSpeed;
+        private final int windDegree;
+        private final int pressure;
+        private final int humidity;
+        private final int feelsLikeTemperature;
 
-        public String getObservationTime() {
-            return observation_time;
-        }
-
-        public double getTemperature() {
-            return temperature;
-        }
-
-        public double getWindSpeed() {
-            return wind_speed;
-        }
-
-        public double getWindDegree() {
-            return wind_degree;
-        }
-
-        public double getPressure() {
-            return pressure;
-        }
-
-        public double getHumidity() {
-            return humidity;
-        }
-
-        public double getFeelslikeTemperature() {
-            return feelslike;
-        }
-
-        public void setObservation_time(String observation_time) {
-            this.observation_time = observation_time;
-        }
-
-        public void setTemperature(int temperature) {
+        @JsonCreator
+        public Current(
+                @JsonProperty("observation_time") String observationTime,
+                @JsonProperty("temperature") int temperature,
+                @JsonProperty("wind_speed") int windSpeed,
+                @JsonProperty("wind_degree") int windDegree,
+                @JsonProperty("pressure") int pressure,
+                @JsonProperty("humidity") int humidity,
+                @JsonProperty("feelslike") int feelsLikeTemperature) {
+            this.observationTime = observationTime;
             this.temperature = temperature;
-        }
-
-        public void setWind_speed(int wind_speed) {
-            this.wind_speed = wind_speed;
-        }
-
-        public void setWind_degree(int wind_degree) {
-            this.wind_degree = wind_degree;
-        }
-
-        public void setPressure(int pressure) {
+            this.windSpeed = windSpeed;
+            this.windDegree = windDegree;
             this.pressure = pressure;
-        }
-
-        public void setHumidity(int humidity) {
             this.humidity = humidity;
-        }
-
-        public void setFeelslike(int feelslike) {
-            this.feelslike = feelslike;
+            this.feelsLikeTemperature = feelsLikeTemperature;
         }
     }
 
-    public class Location {
-        private String name;
-        private String country;
-        private String region;
-        private String lat;
-        private String lon;
+    private static class Location {
+        private final String name;
+        private final String country;
+        private final String region;
+        private final String latitude;
+        private final String longitude;
 
-        // Getter Methods
-
-        public String getName() {
-            return name;
-        }
-
-        public String getCountry() {
-            return country;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public String getLat() {
-            return lat;
-        }
-
-        public String getLon() {
-            return lon;
-        }
-
-        // Setter Methods
-
-        public void setName(String name) {
+        @JsonCreator
+        public Location(
+                @JsonProperty("name") String name,
+                @JsonProperty("country") String country,
+                @JsonProperty("region") String region,
+                @JsonProperty("lat") String latitude,
+                @JsonProperty("lon") String longitude) {
             this.name = name;
-        }
-
-        public void setCountry(String country) {
             this.country = country;
-        }
-
-        public void setRegion(String region) {
             this.region = region;
-        }
-
-        public void setLat(String lat) {
-            this.lat = lat;
-        }
-
-        public void setLon(String lon) {
-            this.lon = lon;
+            this.latitude = latitude;
+            this.longitude = longitude;
         }
     }
 
-    public WeatherstackCurrentResponse() {
+    @JsonCreator
+    public WeatherstackCurrentResponse(
+            @JsonProperty("current") Current current,
+            @JsonProperty("location") Location location) {
+        this.current = current;
+        this.location = location;
     }
 
     @Override
     public String getCity() {
-        return locationObject.getName();
+        return location.name;
     }
 
     @Override
     public String getCountry() {
-        return locationObject.getCountry();
+        return location.country;
     }
 
     @Override
     public LocalTime getObservationTime() {
-        return LocalTime.parse(current.getObservationTime().substring(0,5));
+        return LocalTime.parse(current.observationTime.substring(0,5));
     }
 
     @Override
     public double getTemperature() {
-        return current.getTemperature();
+        return current.temperature;
     }
 
     @Override
     public double getFeelsLikeTemperature() {
-        return current.getFeelslikeTemperature();
+        return current.feelsLikeTemperature;
     }
 
     @Override
     public double getHumidity() {
-        return current.getHumidity();
+        return current.humidity;
     }
 
     @Override
     public double getPressure() {
-        return current.getPressure();
+        return current.pressure;
     }
 
     @Override
     public double getWindSpeed() {
-        return current.getWindSpeed();
+        return current.windSpeed;
     }
 
     @Override
     public double getWindDegree() {
-        return current.getWindDegree();
-    }
-
-    public void setCurrent(Current current) {
-        this.current = current;
+        return current.windDegree;
     }
 }
