@@ -36,7 +36,7 @@ public class ForecastManager {
     }
 
     public static Integer addForecast(ForecastDTO forecastDTO) {
-        Forecast forecast = new Forecast(forecastDTO.getObservationDate(), forecastDTO.getForecastDate(),forecastDTO.getTemperature(),forecastDTO.getFeelsLike(),forecastDTO.getPreassure(),forecastDTO.getHumidity());
+        Forecast forecast = new Forecast(forecastDTO.getObservationDate(), forecastDTO.getForecastDate(),forecastDTO.getTemperature(),forecastDTO.getFeelsLike(),forecastDTO.getPressure(),forecastDTO.getHumidity());
         try (Session session = HibernateHelper.INSTANCE.getSession()) {
             Transaction transaction = session.beginTransaction();
             session.persist(forecast);
