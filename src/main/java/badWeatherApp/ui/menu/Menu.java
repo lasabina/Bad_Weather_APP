@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static badWeatherApp.ui.menu.BadSettings.*;
+
 public class Menu {
-    public void showMenu() {
+    public static void showMenu() {
         System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 4 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Ulubione lokalizacje");
         System.out.println("2. Sprawdz prognoze");
@@ -42,7 +44,7 @@ public class Menu {
 
     }
 
-    private void showFavorite() {
+    private static void showFavorite() {
         System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 4 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Dodaj");
         System.out.println("2. Usun");
@@ -69,27 +71,27 @@ public class Menu {
 
     }
 
-    private void addFavorite() {
+    private static void addFavorite() {
 
 //        LocationManager.addLocation();
 
     }
 
-    private void removeFavorite() {
+    private static void removeFavorite() {
         //todo
 
     }
 
-    private void editFavorite() {
+    private static void editFavorite() {
         //todo
 
     }
 
-    private void returnToTheMainMenu() {
+    private static void returnToTheMainMenu() {
         showMenu();
     }
 
-    private void showForecastWeather() {
+    private static void showForecastWeather() {
         System.out.println("Aby wyszukać prognoze pogody wcisnij liczbę od 1 do 4 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Wyświetl prognoze dla wszystkich ulubionych");
         System.out.println("2. Podaj prognozę dla miasta");
@@ -115,11 +117,11 @@ public class Menu {
         }
     }
 
-    private void showFavoriteForecastWeather() {
+    private static void showFavoriteForecastWeather() {
         //todo
     }
 
-    private void enterTheCity() {
+    private static void enterTheCity() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj miasto: ");
         String city = scanner.nextLine();
@@ -146,7 +148,7 @@ public class Menu {
         ForecastManager.addForecast(forecast);
     }
 
-    private void enterGeographicCoordinates() {
+    private static void enterGeographicCoordinates() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj szerokość geograficzną: ");
         double lat = scanner.nextDouble();
@@ -176,7 +178,7 @@ public class Menu {
 
     }
 
-    private void showSearchHistory() {
+    private static void showSearchHistory() {
         System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 6 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Pokaz wszystko");
         System.out.println("2. Pokaz historie dla miasta");
@@ -213,7 +215,7 @@ public class Menu {
 
     }
 
-    private void removeMyForecastWeatherHistorybyID() {
+    private static void removeMyForecastWeatherHistorybyID() {
         System.out.println("Podaj id prognozy, którą chcesz usunąć");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
@@ -221,14 +223,14 @@ public class Menu {
 
     }
 
-    private void removeMyForecastWeatherHistorybyCity() {
+    private static void removeMyForecastWeatherHistorybyCity() {
         System.out.println("Podaj miasto, dla którego historia ma zostać usunięta");
         Scanner scanner = new Scanner(System.in);
         String city = scanner.nextLine();
         ForecastManager.removeForecastbyCity(city);
     }
 
-    private void showMyForecastWeatherHistoryByCountry() {
+    private static void showMyForecastWeatherHistoryByCountry() {
         System.out.println("Podaj państwo");
         Scanner scanner = new Scanner(System.in);
         String country = scanner.nextLine();
@@ -237,7 +239,7 @@ public class Menu {
         }
     }
 
-    private void showMyForecastWeatherHistoryByCity() {
+    private static void showMyForecastWeatherHistoryByCity() {
         System.out.println("Podaj miasto");
         Scanner scanner = new Scanner(System.in);
         String city = scanner.nextLine();
@@ -246,21 +248,39 @@ public class Menu {
         }
     }
 
-    private void settings() {
-        System.out.println("Aby odznaczyc pokaz / nie pokazuj widocznych parametrow wcisnij liczbę od 1 do 7 i zatwierdz ją klawiszem 'enter'.");
+    private static void settings() {
+        System.out.println("Aby wlaczyc/wylaczyc parametr wcisnij liczbę od 1 do 7 i zatwierdz ją klawiszem 'enter'.");
+        if (BadSettings.isPrintAvarageTemp() == true) {
+            System.out.println("1. Temperatura, wlaczona.");
+        } else {
+            System.out.println("1. Temperatura, wylaczona.");
+        }
 
-        System.out.println("1. Temperatura");
-
-        System.out.println("2. Temperatura odczuwalna");
-
-        System.out.println("3. Cisnienie atmosferyczne");
-
-        System.out.println("4. Wilgotnosc powietrza");
-
-        System.out.println("5. Predkosc wiatru");
-
-        System.out.println("6. Kierunek wiatru");
-
+        if (BadSettings.isPrintFeltTemp() == true) {
+            System.out.println("2. Temperatura odczuwalna, wlaczona. ");
+        } else {
+            System.out.println("2. Temperatura odczuwalna, wylaczona.");
+        }
+        if (BadSettings.isPrintPressure() == true) {
+            System.out.println("3. Cisnienie atmosferyczne, wlaczona. ");
+        } else {
+            System.out.println("3. Cisnienie atmosferyczne, wylaczona.");
+        }
+        if (BadSettings.isPrintHumidity() == true) {
+            System.out.println("4. Wilgotnosc powietrza, wlaczona. ");
+        } else {
+            System.out.println("4. Wilgotnosc powietrza, wylaczona.");
+        }
+        if (BadSettings.isPrintWindSpeed() == true) {
+            System.out.println("5. Predkosc wiatru, wlaczona. ");
+        } else {
+            System.out.println("5. Predkosc wiatru, wylaczona.");
+        }
+        if (BadSettings.isPrintWindDir() == true) {
+            System.out.println("6. Kierunek wiatru, wlaczona. ");
+        } else {
+            System.out.println("6. Kierunek wiatru, wylaczona.");
+        }
         System.out.println("7. Aby powrocic do 'Menu' glownego");
 
 
@@ -270,46 +290,21 @@ public class Menu {
         switch (choiceshowSearchHistory) {
 
             case 1:
-                avarageTemperature();
+                switchPrintAvarageTemp();
             case 2:
-                feltTemperature();
+                switchPrintFeltTemp();
             case 3:
-                pressure();
+                switchPrintPressure();
             case 4:
-                humidity();
+                switchPrintHumidity();
             case 5:
-                windSpeed();
+                switchPrintWindSpeed();
             case 6:
-                windDir();
+                switchPrintWindDir();
             default:
         }
 
     }
 
-    private void avarageTemperature() {
-        //todo
 
-    }
-
-    private void feltTemperature() {
-        //todo
-    }
-
-    private void pressure() {
-        //todo
-
-    }
-
-    private void humidity() {
-        //todo
-    }
-
-    private void windSpeed() {
-        //todo
-
-    }
-
-    private void windDir() {
-        //todo
-    }
 }
