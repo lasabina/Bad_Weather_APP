@@ -16,10 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static badWeatherApp.ui.menu.BadSettings.*;
-
 public class Menu {
-    public static void showMenu() {
+    public static void showMainMenu() {
         System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 4 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Ulubione lokalizacje");
         System.out.println("2. Sprawdz prognoze");
@@ -31,20 +29,20 @@ public class Menu {
 
         switch (choice) {
             case 1:
-                showFavorite();
+                showFavoritesMenu();
             case 2:
-                showForecastWeather();
+                showForecastWeatherMenu();
             case 3:
-                showSearchHistory();
+                showSearchHistoryMenu();
             case 4:
-                settings();
+                showSettingsMenu();
             default:
-                returnToTheMainMenu();
+                showMainMenu();
         }
 
     }
 
-    private static void showFavorite() {
+    private static void showFavoritesMenu() {
         System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 4 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Dodaj");
         System.out.println("2. Usun");
@@ -57,15 +55,15 @@ public class Menu {
         switch (choiceShowFavorite) {
             case 1:
                 addFavorite();
-                showFavorite();
+                showFavoritesMenu();
             case 2:
                 removeFavorite();
-                showFavorite();
+                showFavoritesMenu();
             case 3:
                 editFavorite();
-                showFavorite();
+                showFavoritesMenu();
             case 4:
-                returnToTheMainMenu();
+                showMainMenu();
             default:
         }
 
@@ -87,11 +85,7 @@ public class Menu {
 
     }
 
-    private static void returnToTheMainMenu() {
-        showMenu();
-    }
-
-    private static void showForecastWeather() {
+    private static void showForecastWeatherMenu() {
         System.out.println("Aby wyszukać prognoze pogody wcisnij liczbę od 1 do 4 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Wyświetl prognoze dla wszystkich ulubionych");
         System.out.println("2. Podaj prognozę dla miasta");
@@ -104,16 +98,16 @@ public class Menu {
         switch (choiceShowFavorite) {
             case 1:
                 showFavoriteForecastWeather();
-                showForecastWeather();
+                showForecastWeatherMenu();
             case 2:
-                enterTheCity();
-                showForecastWeather();
+                showForcastByCityName();
+                showForecastWeatherMenu();
             case 3:
-                enterGeographicCoordinates();
-                showForecastWeather();
+                showForecastByCoordinates();
+                showForecastWeatherMenu();
             case 4:
             default:
-                returnToTheMainMenu();
+                showMainMenu();
         }
     }
 
@@ -121,7 +115,7 @@ public class Menu {
         //todo
     }
 
-    private static void enterTheCity() {
+    private static void showForcastByCityName() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj miasto: ");
         String city = scanner.nextLine();
@@ -148,7 +142,7 @@ public class Menu {
         ForecastManager.addForecast(forecast);
     }
 
-    private static void enterGeographicCoordinates() {
+    private static void showForecastByCoordinates() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj szerokość geograficzną: ");
         double lat = scanner.nextDouble();
@@ -178,7 +172,7 @@ public class Menu {
 
     }
 
-    private static void showSearchHistory() {
+    private static void showSearchHistoryMenu() {
         System.out.println("Aby skorzystac z 'Menu' wcisnij liczbę od 1 do 6 i zatwierdz ją klawiszem 'enter'.");
         System.out.println("1. Pokaz wszystko");
         System.out.println("2. Pokaz historie dla miasta");
@@ -195,22 +189,22 @@ public class Menu {
                 for (Forecast allForecast : ForecastManager.getAllForecasts()) {
                     System.out.println(allForecast);
                 }
-                showSearchHistory();
+                showSearchHistoryMenu();
             case 2:
                 showMyForecastWeatherHistoryByCity();
-                showSearchHistory();
+                showSearchHistoryMenu();
             case 3:
                 showMyForecastWeatherHistoryByCountry();
-                showSearchHistory();
+                showSearchHistoryMenu();
             case 4:
                 removeMyForecastWeatherHistorybyCity();
-                showSearchHistory();
+                showSearchHistoryMenu();
             case 5:
                 removeMyForecastWeatherHistorybyID();
-                showSearchHistory();
+                showSearchHistoryMenu();
             case 6:
             default:
-                returnToTheMainMenu();
+                showMainMenu();
         }
 
     }
@@ -248,8 +242,10 @@ public class Menu {
         }
     }
 
-    private static void settings() {
+    private static void showSettingsMenu() {
         System.out.println("Aby wlaczyc/wylaczyc parametr wcisnij liczbę od 1 do 7 i zatwierdz ją klawiszem 'enter'.");
+        //można to upiększyć za pomoca skroconego if'a ( warunek ? co jeśli prawda : co jeśli fałsz)
+        //System.out.println("1. Temperatura - " + (BadSettings.isPrintAvarageTemp() ? " WŁ." : " WYŁ."));
         if (BadSettings.isPrintAvarageTemp() == true) {
             System.out.println("1. Temperatura, wlaczona.");
         } else {
@@ -290,18 +286,26 @@ public class Menu {
         switch (choiceshowSearchHistory) {
 
             case 1:
-                switchPrintAvarageTemp();
+                BadSettings.switchPrintAvarageTemp();
+                showSettingsMenu();
             case 2:
-                switchPrintFeltTemp();
+                BadSettings.switchPrintFeltTemp();
+                showSettingsMenu();
             case 3:
-                switchPrintPressure();
+                BadSettings.switchPrintPressure();
+                showSettingsMenu();
             case 4:
-                switchPrintHumidity();
+                BadSettings.switchPrintHumidity();
+                showSettingsMenu();
             case 5:
-                switchPrintWindSpeed();
+                BadSettings.switchPrintWindSpeed();
+                showSettingsMenu();
             case 6:
-                switchPrintWindDir();
+                BadSettings.switchPrintWindDir();
+                showSettingsMenu();
+            case 7:
             default:
+                showMainMenu();
         }
 
     }
